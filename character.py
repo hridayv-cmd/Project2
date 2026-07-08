@@ -20,3 +20,40 @@ class Inventory:
     def get_total_weight(self):
         """Calculates total weight of all items using a loop."""
         return sum(item["weight"] for item in self.items)
+    # === CHAPTER 9: OOP (Base Class) ===
+class Character:
+    """Represents a base hero in the game."""
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+        self.inventory = Inventory()  # Composition in action
+
+    def get_details(self):
+        """Returns a formatted string of core attributes."""
+        return f"Name: {self.name} | HP: {self.health}"
+
+
+# === CHAPTER 9: OOP (Inheritance) ===
+# Warrior and Mage inherit from the Character parent class
+class Warrior(Character):
+    """A specialized character type with stamina attributes."""
+    def __init__(self, name, health=120, stamina=50):
+        # Initializing the parent class attributes
+        super().__init__(name, health)
+        self.stamina = stamina
+
+    # Overriding / extending parent class functionality
+    def get_details(self):
+        base_details = super().get_details()
+        return f"{base_details} | Stamina: {self.stamina}"
+
+
+class Mage(Character):
+    """A specialized character type with mana attributes."""
+    def __init__(self, name, health=80, mana=100):
+        super().__init__(name, health)
+        self.mana = mana
+
+    def get_details(self):
+        base_details = super().get_details()
+        return f"{base_details} | Mana: {self.mana}"
