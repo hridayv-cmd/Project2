@@ -26,3 +26,21 @@ def save_character(character, filename):
 def load_character(filename):
     """Loads character data from a JSON file using robust exception handling."""
     from character import Warrior, Mage
+    # === CHAPTER 10: EXCEPTION HANDLING (Try-Except) ===
+    try:
+        with open(filename, 'r') as file_object:
+            data = json.load(file_object)
+            
+            # Reconstruct the OOP object from raw JSON data values
+            if data["class"] == "Warrior":
+                hero = Warrior(data["name"], data["health"])
+            else:
+                hero = Mage(data["name"], data["health"])
+                
+            hero.inventory.items = data["inventory"]
+            return hero
+            
+    except FileNotFoundError:
+        # Graceful recovery so the game doesn't crash if a save file isn't there
+        print(f"\n[ERROR] Save file '{filename}' could not be found.")
+        return None
