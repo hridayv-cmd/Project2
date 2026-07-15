@@ -38,3 +38,42 @@ def gameplay_loop(hero):
                 
         elif choice == '2':
             name = input("\nEnter item name: ")
+            # === CHAPTER 10: USER INPUT EXCEPTION HANDLING ===
+            try:
+                weight = float(input("Enter item weight (lbs): "))
+                hero.inventory.add_item(name, weight)
+                print(f"[SUCCESS] Added {name} to inventory.")
+            except ValueError:
+                print("[ERROR] Invalid weight entry. Please enter a valid number (e.g., 4.5).")
+                
+        elif choice == '3':
+            print(f"\n[SYSTEM] Saving character data to '{filename}'...")
+            save_character(hero, filename)
+            print("[SUCCESS] Data saved successfully. Goodbye!")
+            break
+
+def main():
+    choice = main_menu()
+    if choice == '1':
+        name = input("\nEnter character name: ")
+        char_class = input("Choose a class (Warrior / Mage): ").strip().lower()
+        
+        if char_class == 'mage':
+            hero = Mage(name)
+        else:
+            hero = Warrior(name) # Default to warrior
+            
+        print(f"\n[SUCCESS] Created {hero.name} the {hero.__class__.__name__}!")
+        gameplay_loop(hero)
+        
+    elif choice == '2':
+        name = input("\nEnter the character name to load: ").strip().lower()
+        hero = load_character(f"{name}_save.json")
+        if hero:
+            print(f"\n[SUCCESS] Welcome back, {hero.name}!")
+            gameplay_loop(hero)
+            
+    print("\nThank you for playing!")
+
+if __name__ == "__main__":
+    main()
