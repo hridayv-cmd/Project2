@@ -6,7 +6,7 @@ Resources Used: Python Crash Course Chapters 9 (OOP) and 8 (Functions).
 Date: July 8, 2026
 """
 
-# === CHAPTER 9: OOP (Composition) ===
+# CHAPTER 9: OOP (Composition) 
 # The Inventory class is composed of a list of items.
 class Inventory:
     """Manages a character's collected items."""
@@ -20,7 +20,7 @@ class Inventory:
     def get_total_weight(self):
         """Calculates total weight of all items using a loop."""
         return sum(item["weight"] for item in self.items)
-    # === CHAPTER 9: OOP (Base Class) ===
+    #  CHAPTER 9: OOP (Base Class) 
 class Character:
     """Represents a base hero in the game."""
     def __init__(self, name, health):
@@ -33,7 +33,7 @@ class Character:
         return f"Name: {self.name} | HP: {self.health}"
 
 
-# === CHAPTER 9: OOP (Inheritance) ===
+# CHAPTER 9: OOP (Inheritance) 
 # Warrior and Mage inherit from the Character parent class
 class Warrior(Character):
     """A specialized character type with stamina attributes."""
